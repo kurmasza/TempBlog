@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  article: MyText for article 1.  It has to be at least 20 characters long
+  likes: 1
+  status: 1
+
+two:
+  title: MyString
+  article: MyText for article 2.  Like article 2, it has to be reasonably long.
+  likes: 1
+  status: 1
