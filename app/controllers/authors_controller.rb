@@ -1,10 +1,34 @@
+require 'nokogiri'
+
 class AuthorsController < ApplicationController
   before_action :set_author, only: [:show, :edit, :update, :destroy]
 
+  def json_response(object, status = :ok)
+    render json: object, status: status
+  end
+  
   # GET /authors
   # GET /authors.json
   def index
     @authors = Author.all
+    
+    # Apply XSLT
+    document = Nokogiri::XML(@authors.as_json.to_xml)
+    template = Nokogiri::XSLT(File.read('app/assets/author.xsl'));
+    transformed_document = template.transform(document)    
+    
+    # dumps the transformed document to the console so you can see the effects
+    puts "---\nBefore"
+    puts document
+    puts "---\nAfter"    
+    puts transformed_document  
+    
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render :index, status: :ok}
+      format.xml {render xml: @authors.as_json}
+      #format.xml {render xml: transformed_document}
+    end    
   end
 
   # GET /authors/1

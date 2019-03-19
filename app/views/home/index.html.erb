@@ -1,0 +1,32 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1>Welcome to my world of bees!</h1>
+    <p>The happiness of the bee and the dolphin is to exist. For man it is to know that and to wonder at it.</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <!-- Example row of columns -->
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-md-4">
+        <h2>
+          <%= post.title%>
+        </h2>
+        <p>
+          <%=post.article.truncate_words(30)%>
+        </p>
+        <p>
+          <%= link_to 'Read more >', post, class: "btn btn-default"%>
+        </p>
+      </div>
+      <% end %>
+  </div>
+
+  <hr>
+
+  <footer>
+    <p>&copy; 2018 Company, Inc.</p>
+  </footer>
+</div>
