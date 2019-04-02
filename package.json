@@ -1,5 +1,7 @@
 {
   "name": "blog",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "cypress": "^3.2.0"
+  }
 }

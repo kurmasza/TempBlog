@@ -18,10 +18,10 @@ class AuthorsController < ApplicationController
     transformed_document = template.transform(document)    
     
     # dumps the transformed document to the console so you can see the effects
-    puts "---\nBefore"
-    puts document
-    puts "---\nAfter"    
-    puts transformed_document  
+    #  puts "---\nBefore"
+    # puts document
+    # puts "---\nAfter"    
+    # puts transformed_document  
     
     respond_to do |format|
       format.html {render :index}
@@ -63,11 +63,11 @@ class AuthorsController < ApplicationController
 
   # PATCH/PUT /authors/1
   # PATCH/PUT /authors/1.json
-  def update
+  def update   
     respond_to do |format|
       if @author.update(author_params)
         format.html { redirect_to @author, notice: 'Author was successfully updated.' }
-        format.json { render :show, status: :ok, location: @author }
+         format.json { render :show, status: :ok, location: @author }
       else
         format.html { render :edit }
         format.json { render json: @author.errors, status: :unprocessable_entity }

@@ -1,3 +1,5 @@
+require 'models/anonimizer'
+
 class Post < ApplicationRecord
   
   belongs_to :author
@@ -9,6 +11,5 @@ class Post < ApplicationRecord
   validates :article, presence: true, length: {minimum: 20, maximum: 600}
 
   validates :likes, numericality: {greater_than_or_equal_to: 0}
-
   
 end

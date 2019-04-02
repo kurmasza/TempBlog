@@ -3,6 +3,7 @@ require 'test_helper'
 class PostsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @post = posts(:one)
+    @author = authors(:one)
   end
 
   test "should get index" do
@@ -17,7 +18,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create post" do
     assert_difference('Post.count') do
-      post posts_url, params: { post: { article: @post.article, likes: @post.likes, status: @post.status, title: @post.title } }
+      post posts_url, params: { post: { article: @post.article, likes: @post.likes, status: @post.status, title: @post.title, author: @author} }
     end
 
     assert_redirected_to post_url(Post.last)

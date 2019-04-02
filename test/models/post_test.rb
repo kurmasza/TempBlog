@@ -1,13 +1,21 @@
 require 'test_helper'
 
+require 'helpers/my_asserts'
+
 class PostTest < ActiveSupport::TestCase
   
   def setup
-    @post = Post.create(title: 'A title', article: 'This is the actual text of our article.  It can be rather long.', likes: 0, status: 1)
+    author = Author.create(fname: 'Bob', lname: 'Smith', email: 'bob@smith.com')
+    @post = Post.create(title: 'A title', article: 'This is the actual text of our article.  It can be rather long.', likes: 0, status: 1, author: author)
   end
   
+  test "post has author" do
+    assert_equal @post.author.fname, 'Bob'
+  end
+     
   test "post must be valid" do
-    assert @post.valid?
+    @post.title = ""
+    assert @post.valid?, "@post.vaild? came back false."
   end
   
   test "title must be present" do 
@@ -67,8 +75,5 @@ class PostTest < ActiveSupport::TestCase
 		          assert false, "#{is} should be invalid"
 		      end
 		    end
-  		end 
-
-  
-  
+  		end   
 end
