@@ -1,0 +1,15 @@
+current directory: /Users/kurmasz/Documents/Courses/CIS658/Code/TempBlog/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.0/ext/bootsnap
+/Users/kurmasz/.rvm/rubies/ruby-2.6.0/bin/ruby -I /Users/kurmasz/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0 -r ./siteconf20190402-11619-1sj149k.rb extconf.rb
+creating Makefile
+
+current directory: /Users/kurmasz/Documents/Courses/CIS658/Code/TempBlog/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.0/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/kurmasz/Documents/Courses/CIS658/Code/TempBlog/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.0/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/kurmasz/Documents/Courses/CIS658/Code/TempBlog/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.0/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20190402-11619-pzdcdf/bootsnap

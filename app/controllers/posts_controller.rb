@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   before_action :set_statuses
-  
+
   # GET /posts
   # GET /posts.json
   def index
@@ -27,16 +27,13 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.author = Author.find(post_params[:author_id])
 
-    puts "Created post"
-    
     respond_to do |format|
-      if @post.save!
-        puts "Save succeeded"
+      if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        puts "Save failed"
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -47,7 +44,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update!(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -77,7 +74,7 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :article, :likes, :status, :author_id)
     end
-  
+
     def set_statuses
        @statuses = Post.statuses
     end

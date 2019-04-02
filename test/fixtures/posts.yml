@@ -5,9 +5,11 @@ one:
   article: MyText for article 1.  It has to be at least 20 characters long
   likes: 1
   status: 1
+  author: davyJones
 
 two:
   title: MyString
   article: MyText for article 2.  Like article 2, it has to be reasonably long.
   likes: 1
   status: 1
+  author: faulkner
