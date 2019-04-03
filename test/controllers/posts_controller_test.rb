@@ -4,7 +4,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @post = posts(:one)
     @new_post = Post.new(title: "All about articles", article: "a an the -- These are the articles in English",
-                        status: 1, likes: 17)
+                         status: 1, likes: 17)
   end
 
   test "#index renders index view" do
@@ -58,7 +58,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     # Make sure a new record appears in the DB
     assert_difference('Post.count') do
       post posts_url, params: { post: { article: @new_post.article, likes: @new_post.likes, status: @new_post.status,
-                                        title:  @new_post.title, author_id: authors(:faulkner).id} }
+                                        title: @new_post.title, author_id: authors(:faulkner).id } }
     end
 
     # Make sure that record contains with we think it should.
@@ -70,22 +70,36 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
   test "create should redirect to created post if successful" do
     post posts_url, params: { post: { article: @new_post.article, likes: @new_post.likes, status: @new_post.status,
-                                      title:  @new_post.title, author_id: authors(:faulkner).id} }
+                                      title: @new_post.title, author_id: authors(:faulkner).id } }
     assert_redirected_to post_url(Post.last)
   end
 
   test "create should redirect to new if unsuccessful" do
     post posts_url, params: { post: { article: 'ts', likes: @new_post.likes, status: @new_post.status,
-                                      title:  @new_post.title, author_id: authors(:faulkner).id} }
+                                      title: @new_post.title, author_id: authors(:faulkner).id } }
     assert_template :new
   end
 
   test "create should set error if unsuccessful" do
     post posts_url, params: { post: { article: 'ts', likes: @new_post.likes, status: @new_post.status,
-                                      title:  @new_post.title, author_id: authors(:faulkner).id} }
-    assert_template :new
-
+                                      title: @new_post.title, author_id: authors(:faulkner).id } }
     assert assigns[:post].errors.any?
+  end
+
+  test "create should redirect to new if unsuccessful (using Mock)" do
+
+    # Re-define the save method on @new_post so that it always returns false.
+    def @new_post.save
+      false
+    end
+
+    # (1) Calling post.stub "takes over" the Post.new method and causes it to return @new_post
+    # (instead behaving normally.)
+    Post.stub :new, @new_post do
+      post posts_url, params: { post: { article: @new_post, likes: @new_post.likes, status: @new_post.status,
+                                        title: @new_post.title, author_id: authors(:faulkner).id } }
+      assert_template :new
+    end
   end
 
 
